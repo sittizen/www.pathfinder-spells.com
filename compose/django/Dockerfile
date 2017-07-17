@@ -2,6 +2,9 @@ FROM python:3.5
 
 ENV PYTHONUNBUFFERED 1
 
+RUN  apt update && apt -y upgrade && apt install -y vim postgresql-client &&  apt-get -y autoremove
+
+
 RUN groupadd -r django \
     && useradd -r -g django django
 

@@ -1,5 +1,9 @@
 FROM python:3.5
+
 ENV PYTHONUNBUFFERED 1
+
+RUN  apt update && apt -y upgrade && apt install -y vim postgresql-client &&  apt-get -y autoremove
+
 
 # Requirements have to be pulled and installed here, otherwise caching won't work
 COPY ./requirements /requirements

@@ -53,9 +53,8 @@ THIRD_PARTY_APPS = [
 
 # Apps specific for this project go here.
 LOCAL_APPS = [
-    # custom users app
     'pathfinder_spells.users.apps.UsersConfig',
-    # Your stuff: custom apps go here
+    'pathfinder_spells.spells',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -109,7 +108,7 @@ MANAGERS = ADMINS
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
-    'default': env.db('DATABASE_URL', default='postgres:///www.pathfinder_spells.com'),
+    'default': env.db(),
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
