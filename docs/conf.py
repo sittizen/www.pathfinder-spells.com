@@ -39,7 +39,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'www.pathfinder-spells.com'
+project = 'www.pathfinder-spelltables.com'
 copyright = """2017, Simone Cittadini"""
 
 # The version info for the project you're documenting, acts as replacement for
@@ -184,7 +184,7 @@ latex_elements = {
 latex_documents = [
     ('index',
      'www.pathfinder_spells.com.tex',
-     'www.pathfinder-spells.com Documentation',
+     'www.pathfinder-spelltables.com Documentation',
      """Simone Cittadini""", 'manual'),
 ]
 
@@ -214,7 +214,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'www.pathfinder_spells.com', 'www.pathfinder-spells.com Documentation',
+    ('index', 'www.pathfinder_spells.com', 'www.pathfinder-spelltables.com Documentation',
      ["""Simone Cittadini"""], 1)
 ]
 
@@ -228,9 +228,9 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    ('index', 'www.pathfinder_spells.com', 'www.pathfinder-spells.com Documentation',
-     """Simone Cittadini""", 'www.pathfinder-spells.com',
-     """Like www.dnd-spells.com, but for Pathfinder.""", 'Miscellaneous'),
+    ('index', 'www.pathfinder_spells.com', 'www.pathfinder-spelltables.com Documentation',
+     """Simone Cittadini""", 'www.pathfinder-spelltables.com',
+     """Like www.dnd-spelltables.com, but for Pathfinder.""", 'Miscellaneous'),
 ]
 
 # Documents to append as an appendix to all manuals.

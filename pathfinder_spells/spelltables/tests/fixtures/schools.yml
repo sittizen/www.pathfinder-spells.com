@@ -1,0 +1,49 @@
+importer: spelltables.masteries
+
+mastery_type: School
+
+masteries:
+  abjuration:
+    name: Abjuration
+    subs:
+      - Banishment
+      - Counterspell
+  conjuration:
+    name: Conjuration
+    subs:
+      - Creation
+      - Extradimension
+      - Infernal Binde
+      - Teleportation
+  divination:
+    name: Divination
+    subs:
+      - Foresight
+      - Scryer
+  enchantment:
+    name: Enchantment
+    subs:
+      - Controller
+      - Manipulator
+  evocation:
+    name: Evocation
+    subs:
+      - Admixture
+      - Generation
+  illusion:
+    name: Illusion
+    subs:
+      - Deception
+      - Mage of the Veil
+      - Phantasm
+      - Shadow
+  necromancy:
+    name: Necromancy
+    subs:
+      - Life
+      - Undead
+  transmutation:
+    name: Transmutation
+    subs:
+      - Enhancement
+      - Shapechange

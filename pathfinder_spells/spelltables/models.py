@@ -20,7 +20,8 @@ class Mastery(models.Model):
     specializes = models.ForeignKey('self', null=True, on_delete=models.CASCADE)
 
     class Meta:
-        unique_together = ('mastery_type', 'name')
+        unique_together = ('mastery_type', 'name', 'specializes')
+        ordering = ('mastery_type', 'name')
 
     # todo checks on save, can't specialize a mastery of different type
 
@@ -42,16 +43,20 @@ class PlayerClass(models.Model):
     def spell_list(self, mastery_type=0, sub_masteries=[], level=None):
 
         if mastery_type:
-            qs = MasteryLevel.objects.filter(mastery__in=Mastery.objects.filter(mastery_type__exact=mastery_type))
+            if not sub_masteries:
+                qs = MasteryLevel.objects.filter(mastery__in=Mastery.objects.filter(mastery_type__exact=mastery_type),
+                                                 mastery__specializes__isnull=True)
             if sub_masteries:
-                qs = qs.filter(mastery__in=sub_masteries)
+                qs = MasteryLevel.objects.filter(mastery__in=sub_masteries)
         else:
-            qs = PlayerClassLevel.objects.filter(player_class__exact=self)
+            if not sub_masteries:
+                qs = PlayerClassLevel.objects.filter(player_class__exact=self)
             if sub_masteries:
-                qs = qs.filter(spell__masteries__in=sub_masteries)
+                qs = PlayerClassLevel.objects.filter(spell__masteries__in=sub_masteries)
 
         if level is not None:
             qs = qs.filter(level__exact=level)
+
         return qs.order_by('level', 'spell__name').all()
 
 
@@ -63,6 +68,8 @@ class Spell(models.Model):
 
     def add_to_mastery(self, mastery, level=None):
         MasteryLevel.objects.create(mastery=mastery, spell=self, level=level)
+        if mastery.specializes is not None:
+            MasteryLevel.objects.create(mastery=mastery.specializes, spell=self, level=level)
 
     def add_to_playerclass(self, player_class, level=None):
         PlayerClassLevel.objects.create(player_class=player_class, spell=self, level=level)
@@ -75,7 +82,7 @@ class Spell(models.Model):
 
 class MasteryLevel(models.Model):
     """
-    Generate the list of spells by domain|bloodline|etc / level
+    Generate the list of spelltables by domain|bloodline|etc / level
     """
     level = models.PositiveIntegerField(null=True)  # positioning into School has no level
     spell = models.ForeignKey(Spell, on_delete=models.CASCADE)
@@ -90,7 +97,7 @@ class MasteryLevel(models.Model):
 
 class PlayerClassLevel(models.Model):
     """
-    Generate the list of spells by class / level
+    Generate the list of spelltables by class / level
     """
     level = models.PositiveIntegerField()
     spell = models.ForeignKey(Spell, on_delete=models.CASCADE)
@@ -101,9 +108,10 @@ class PlayerClassLevel(models.Model):
 
 
 class SpellsPerDay(models.Model):
+    # todo add 'base' to identify common vs specializations ?
     level = models.PositiveIntegerField()
     player_class = models.ForeignKey(PlayerClass)
-    mastery_type = models.PositiveIntegerField(default=0)  # eg clerics have separate spell per day for domain spells
+    mastery_type = models.PositiveIntegerField(default=0)
 
     num_of_spells = models.PositiveIntegerField()
     apply_attribute_bonus = models.BooleanField(default=True)

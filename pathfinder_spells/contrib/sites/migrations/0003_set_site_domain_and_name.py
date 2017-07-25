@@ -13,8 +13,8 @@ def update_site_forward(apps, schema_editor):
     Site.objects.update_or_create(
         id=settings.SITE_ID,
         defaults={
-            'domain': 'pathfinder-spells.com',
-            'name': 'www.pathfinder-spells.com'
+            'domain': 'pathfinder-spelltables.com',
+            'name': 'www.pathfinder-spelltables.com'
         }
     )
 
