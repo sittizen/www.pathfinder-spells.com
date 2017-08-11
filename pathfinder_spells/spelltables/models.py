@@ -62,6 +62,10 @@ class PlayerClass(models.Model):
 
 class Spell(models.Model):
     name = models.CharField(max_length=128, unique=True)
+    components = models.CharField(max_length=32, null=True)
+    description = models.TextField()
+    effect = models.CharField(max_length=256, null=True)
+
     masteries = models.ManyToManyField(Mastery,
                                        through='MasteryLevel',
                                        through_fields=('spell', 'mastery'))

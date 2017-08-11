@@ -55,6 +55,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     'pathfinder_spells.users.apps.UsersConfig',
     'pathfinder_spells.core',
+    'pathfinder_spells.pcs',
     'pathfinder_spells.spelltables',
 ]
 
